@@ -1,28 +1,29 @@
 pipeline {
     agent {
         docker {
-            image 'node:latest' 
-            args '-p 3005:3005 -u root:root' 
+            image 'node:current-buster-slim'
+            args '-p 3000:3000'
         }
     }
+    environment {
+        CI = 'true'
+    }
     stages {
-        stage('Build') { 
+        stage('Build') {
             steps {
-                sh 'echo my simple node and stuff'
-                sh 'npm install' 
+                sh 'npm install'
             }
         }
         stage('Test') {
             steps {
-                sh 'echo at test'
                 sh './jenkins/scripts/test.sh'
             }
         }
-        stage('Deliver') { 
+        stage('Deliver') {
             steps {
-                sh './jenkins/scripts/deliver.sh' 
-                input message: 'Finished using the web site? (Click "Proceed" to continue)' 
-                sh './jenkins/scripts/kill.sh' 
+                sh './jenkins/scripts/deliver.sh'
+                input message: 'Finished using the web site? (Click "Proceed" to continue)'
+                sh './jenkins/scripts/kill.sh'
             }
         }
     }
