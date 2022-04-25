@@ -2,7 +2,7 @@ pipeline {
     agent {
         docker {
             image 'node:current-buster-slim'
-            args '-p 3003:3003 -u root:root'
+            args '-p 3000:3000 -it -u root:root'
         }
     }
     environment {
