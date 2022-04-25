@@ -3,12 +3,12 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'docker build -t sample:dev2 .'
+                sh 'docker build -t node:react-test .'
             }
         }
         stage('Deliver') {
             steps {
-                sh 'docker run -i --rm -p 3005:3005 -e CHOKIDAR_USEPOLLING=true sample:dev2'
+                sh './jenkins/scripts/myDeliver.sh'
             }
         }
     }
