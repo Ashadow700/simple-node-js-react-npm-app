@@ -12,5 +12,10 @@ pipeline {
                 sh './jenkins/scripts/myDeliver.sh'
             }
         }
+        stage('Cleanup') {
+            steps {
+                sh 'docker rmi $(docker images -qa -f 'dangling=true') || true'
+            }
+        }
     }
 }
