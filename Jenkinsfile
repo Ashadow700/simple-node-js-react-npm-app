@@ -14,7 +14,7 @@ pipeline {
         }
         stage('Cleanup') {
             steps {
-                sh 'docker rmi $(docker images -qa -f 'dangling=true') || true'
+                sh 'docker rmi $(docker images -qa -f "dangling=true") || true'
             }
         }
     }
